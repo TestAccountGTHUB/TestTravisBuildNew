@@ -22,5 +22,6 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.example.mayank.testtravis", appContext.getPackageName());
+        System.out.println();
     }
 }
