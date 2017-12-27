@@ -1,8 +1,7 @@
-vis.yml and add the following commands over there
+language: android
+jdk: oraclejdk8
+sudo: required
 
-language: android 
-jdk:
-  - oraclejdk8
 android:
   components:
     - tools
