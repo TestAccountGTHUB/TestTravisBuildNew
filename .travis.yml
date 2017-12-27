@@ -2,6 +2,11 @@ language: android
 jdk: oraclejdk8
 sudo: required
 
+env:
+ global:
+    - secure: "IqdulAPvKgg9V0bgsFZawNx5UcxciELrWFYkw8wWvjLZFbbPA2lJjx5R/nhEEyzJrQwnbrazG3ucM3diYTXyfENNVppUmyRtKTAaIPsUbEB/LRyPS3dHdZBC6gspPIbTpqgZ9ezyUMlYbQtkR3vfANccYYTKqpzgVkGuOxRxV0rZSAGPGSPW7Jib4vtdP4RFbOIrIdjPU6CnOA8X/P1unhj9NJUtpOwTZF8cAPi8QxspWIa8Ju+7Vshd9Bx0EGeR3BnMrhAhimDMX8Eh8oi83XkI1qOe8JzcoSaVCO96Etpd/apaAnSIMx8ObNVDcOKmkz2hx0EC7kB4+N/abNbpYhY6vJ8TVP8TC88ppCH7vpnV445yojtZdW6IhBi11qUbvIzylmi53dGs27cmi46SwxCCXvfPoGmByOFuQHF/eA3RmAlA7jwtrWrv8Yac0NKr6ZsAO6PqzdsvRGPdxuD1NCnKb4pCOG8fyhQhBHADSocRbY7dTC/PQTqW8rVVQaql6gTQRu7ppuuyvR1fGqe9Ycpyvk5WsGWMtfS0G8S6Wn/qBU6XzHtpn7p5Kbv68bVIKjZHhtAiP41SSERh3HwwV5qDOAYXLIFCuoBH7g0qh8Gnd6jpBKza6r0btqg3p6AX36IIJ7EH20xtuhqgmR+JQnOyVF9js93enPZfDWpzG90="
+    - secure: "CZ2K+MIgOj+wc9R2LpX3zcA6zB886xdw7DJnIWNGxaX6mBh3p5q1XzzI7IlpxRWk78kOOy3LDlGluAEpW5yp0rKNXq33FZZCr86JMvsAsdPD4wdTq//ysoijdfsz/M9doBt0ls13SkIm0v7A/jcFPG+pKlYNm2WyHkr0/rwDTqRq//KHP6p7M7xPPhXWdD5eich24MCZ45KGFKm+QLa8jzmjXaGMIl54XoJenKb7MkMHLHRGa96etS6GlUJ6YcAX8UE4RLHIPsXaRR9vCYHT3HeuYzC34QPdvOlqjlPJxq/M1pbSqY4U6QGW8jduow7DYtBSeBdvDeiI+MzIdmk2S+yTqv8Tb5u+/qFigGIZGmIqRvUIY2PKx8iOXPAWP1cr2ITI9ngG47wRC5BMOMMZzXUqdfO3sIWeqLNJHYqBGkL39OYI3rBRHsmlhXMaOjqJfrXHHGgxyv/UbMz6AabFtI3WX2Qz1vxRecKb4atZ0u1Kaij0/h3RBPEwXzg3BXlInavgiVAGwSOowZB8kCetFwjyMLjwzKCGLnDEHvwjoitv3KJ4rY6qQPa3OpzJQKS1gu+Mw2ya9sfaEFrB6q16DyIRDacgG7DeOjpJkPz33BXMlWMI4DKXiZwPzpGgMkl9OXQIEIF5D6ahJsiLuMfM8TDEc6Gh/2JhXYtZyVdpz1s="
+
 android:
   components:
     - platform-tools
@@ -13,6 +18,7 @@ android:
     - extra-android-m2repository
 
 before_install:
+     - openssl aes-256-cbc -K $encrypted_07eead253e04_key -iv $encrypted_07eead253e04_iv -in TestTravisBuildNew.jks.enc -out TestTravisBuildNew.jks -dc87c2d66cf7c4abeca9e1e77ef3e5201ec68370b
      - mkdir "$ANDROID_HOME/licenses" || true
      - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
      - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "$ANDROID_HOME/licenses/android-sdk-preview-license"
@@ -27,3 +33,23 @@ before_script:
   - adb shell input keyevent 82 &
 
 script: ./gradlew connectedAndroidTest
+
+before_deploy:
+  - cp $TRAVIS_BUILD_DIR/TestTravisBuildNew.jks $HOME
+  - cd app/build/outputs/apk/
+  - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $HOME/TestTravisBuildNew.jks -storepass $storepass -keypass $keypass app-release-unsigned.apk yourapp_keystore
+# Verification
+  - jarsigner -verify app-release-unsigned.apk
+  - "${ANDROID_HOME}/build-tools/24.0.2/zipalign -v 4 app-release-unsigned.apk TravisExample.apk"
+
+deploy:
+  provider: releases
+  file: TravisExample.apk
+  skip_cleanup: true
+
+  on:
+    repo: TestAccountGTHUB/TestRepo
+    tags: true
+    jdk: oraclejdk8
+  api_key:
+     secure: "J0X81aScqLYcjzpg8XENaXmzFx2CMwzuTdGe4pfs538wMHP5UK4Aj3Q6hTlcisP6/f4lYnUa0RuoG2MX2HsUXKTWzN8cgcnBZbPk/iofzdpbUOeLLcLVT5e0STvSxcYWOsrwrh1TxeXV5rblWybD5E+1AwLRvRGutlC6xAgz5eqE974KQ71EtfwC0gZDges5hqSQ+8bwYxQ2jO7hLsJjJSpaMDfzdYGhKeH2LyJOvxvAnbFsnUCnGqsXMldF4JxaXYwvjZ9Gr8qmH6t2mfiM+univMBv1rehgclWNokySXU1PNfOoO5SSWYvIGU/cwHJufswCserYxLhq2F7AquxK8SjbZNMwJTQO8ZJC8yCjByL0PJqAqoczWqjuo6TTUTX4WWDqgdMd73SV053BzwbEjxH5ysuBiTQNBHe4m26qAE/kQErhqiXjADixjqAdXYC6d7bHDo3QPJWXKw77tLGKPQ4g4qH3MxdZu7Di5YxedwqPnOjCkAXhIuYbB8rcQWrN6GBe88deOlF4ksjt78HsOeUPY764mz8AdWdm2z54OuPgI/+O6/ZvIXTXW0viO6Whw4mg9UdrEn0y/ByPwXJMF2i8lqO35cGZAZYwdkbuqMenWcmBvKne/p/DlEmHS7w8lk7lA7Oyf61CM7iqGAbeBpKw9pOsN3UA0EeDBeMz1U="
