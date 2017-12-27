@@ -1,7 +1,7 @@
  #create a new directory that will contain out generated apk
   mkdir $HOME/android/
   #copy generated apk from build folder to the folder just created
-  cp -R app/build/outputs/apk/debug/app-debug.apk $HOME/android/
+  cp -R app/build/outputs/apk/debug/app-debug$TRAVIS_BUILD_NUMBER.apk $HOME/android/
   #go to home and setup git  
   cd $HOME
   git config --global user.email "trythisemail123@gmail.com"
