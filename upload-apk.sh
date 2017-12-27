@@ -1,5 +1,5 @@
  #create a new directory that will contain out generated apk
-  mkdir $HOME/buildApk/ 
+  mkdir $HOME/android/
   #copy generated apk from build folder to the folder just created
   cp -R app/build/outputs/apk/debug/app-debug.apk $HOME/android/
   #go to home and setup git  
