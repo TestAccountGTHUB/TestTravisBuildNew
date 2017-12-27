@@ -48,7 +48,7 @@ deploy:
   skip_cleanup: true
 
   on:
-    repo: TestAccountGTHUB/TestRepo
+    repo: TestAccountGTHUB/TestTravisBuildNew
     tags: true
     jdk: oraclejdk8
   api_key:
