@@ -48,8 +48,9 @@ deploy:
   skip_cleanup: true
 
   on:
-    repo: TestAccountGTHUB/TestTravisBuildNew
+    repo: TestAccountGTHUB/TestRepo
     tags: true
+    all_branches: true
     jdk: oraclejdk8
   api_key:
      secure: "J0X81aScqLYcjzpg8XENaXmzFx2CMwzuTdGe4pfs538wMHP5UK4Aj3Q6hTlcisP6/f4lYnUa0RuoG2MX2HsUXKTWzN8cgcnBZbPk/iofzdpbUOeLLcLVT5e0STvSxcYWOsrwrh1TxeXV5rblWybD5E+1AwLRvRGutlC6xAgz5eqE974KQ71EtfwC0gZDges5hqSQ+8bwYxQ2jO7hLsJjJSpaMDfzdYGhKeH2LyJOvxvAnbFsnUCnGqsXMldF4JxaXYwvjZ9Gr8qmH6t2mfiM+univMBv1rehgclWNokySXU1PNfOoO5SSWYvIGU/cwHJufswCserYxLhq2F7AquxK8SjbZNMwJTQO8ZJC8yCjByL0PJqAqoczWqjuo6TTUTX4WWDqgdMd73SV053BzwbEjxH5ysuBiTQNBHe4m26qAE/kQErhqiXjADixjqAdXYC6d7bHDo3QPJWXKw77tLGKPQ4g4qH3MxdZu7Di5YxedwqPnOjCkAXhIuYbB8rcQWrN6GBe88deOlF4ksjt78HsOeUPY764mz8AdWdm2z54OuPgI/+O6/ZvIXTXW0viO6Whw4mg9UdrEn0y/ByPwXJMF2i8lqO35cGZAZYwdkbuqMenWcmBvKne/p/DlEmHS7w8lk7lA7Oyf61CM7iqGAbeBpKw9pOsN3UA0EeDBeMz1U="
