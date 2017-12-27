@@ -30,14 +30,15 @@ cache:
 
 deploy:
   provider: releases
-   api_key:
-      secure: "HkNuged4tcCd6pNNQQofhIVyAQmm7Sj3BAibsR1Jh/S/mqO5FwQe++oFl9LBYDMIqCajaaR5WWePTTzRxWaNmD5Pd4aePEkwQV14JQRxfF1ck6ZQItjpIdM7Lg3X6Jk9OC5RW1eQyrcsv6IXzBpqKwU8JSI/R2QSaAOEpMGUJ/Jruvs/mRPedUY63iizcaC6fDwHhfC2FTbKOjs7afp1iIURtrHFvW7C3rzHPCr8w1NNtnPG06/yy2L9A0sB+dhluBYxFIVvLiJ+3JJQjKxXDHrlBXoBEXWXhgLI05c2YDgRDKk+0MmO/qtHkbe/SwLdP4/35yHE7MwtUNUANCiKW01Zn/dgfAbDT5SUAYH7S1RMOUWsn/P268PUOW7kS6j5DnADsehv1YFB0rF3pfCl3xUPN4gKjmf7otEc0yfZTG4dSKwzoXMNw9wAApsTZ1R8IZVozHiiO6EhDSWI9Kv4OhP3cyLLYjxESHHtZexUqVwhjHsKdqMiro/JoWHIraRYI25fRBfLyo6PIsyKCMR6cbwgauej4Nmgj1M0Ykl1J+6vVuENU4Pa3IWtmwu/bCVStvu6RbH2yJOij8G1RasdM+hmTLUmEPd4QtmYQlwqISAg7LjiQh6Wo8AkI4E2D24zE6Q0HixrRXFnDS9b3E/30XW43ViPJftoTLjojMIBZbA="
-   file: "TestTravisBuildNew/build/outputs/apk/TestTravisBuildNew*release*.apk"
-   file_glob: "true"
-   skip_cleanup: true
-   on:
+  file: "TestTravisBuildNew/build/outputs/apk/TestTravisBuildNew*release*.apk"
+  file_glob: "true"
+  skip_cleanup: true
+
+  on:
     branch: master
     repo: TestAccountGTHUB/TestRepo
+  api_key:
+      secure: "HkNuged4tcCd6pNNQQofhIVyAQmm7Sj3BAibsR1Jh/S/mqO5FwQe++oFl9LBYDMIqCajaaR5WWePTTzRxWaNmD5Pd4aePEkwQV14JQRxfF1ck6ZQItjpIdM7Lg3X6Jk9OC5RW1eQyrcsv6IXzBpqKwU8JSI/R2QSaAOEpMGUJ/Jruvs/mRPedUY63iizcaC6fDwHhfC2FTbKOjs7afp1iIURtrHFvW7C3rzHPCr8w1NNtnPG06/yy2L9A0sB+dhluBYxFIVvLiJ+3JJQjKxXDHrlBXoBEXWXhgLI05c2YDgRDKk+0MmO/qtHkbe/SwLdP4/35yHE7MwtUNUANCiKW01Zn/dgfAbDT5SUAYH7S1RMOUWsn/P268PUOW7kS6j5DnADsehv1YFB0rF3pfCl3xUPN4gKjmf7otEc0yfZTG4dSKwzoXMNw9wAApsTZ1R8IZVozHiiO6EhDSWI9Kv4OhP3cyLLYjxESHHtZexUqVwhjHsKdqMiro/JoWHIraRYI25fRBfLyo6PIsyKCMR6cbwgauej4Nmgj1M0Ykl1J+6vVuENU4Pa3IWtmwu/bCVStvu6RbH2yJOij8G1RasdM+hmTLUmEPd4QtmYQlwqISAg7LjiQh6Wo8AkI4E2D24zE6Q0HixrRXFnDS9b3E/30XW43ViPJftoTLjojMIBZbA="
 
 after_success:
 - sh set_tags.sh
