@@ -7,16 +7,14 @@
   git config --global user.email "trythisemail123@gmail.com"
   git config --global user.name "TestAccountGTHUB"
   #clone the repository in the buildApk folder
-  git clone --quiet --branch=master  https://TestAccountGTHUB:$GITHUB_API_KEY@github.com/TestAccountGTHUB/TestTravisBuildNew  master > /dev/null
+  git clone --quiet --branch=master  https://TestAccountGTHUB:$GITHUB_API_KEY@github.com/TestAccountGTHUB/TestRepo  master > /dev/null
   #go into directory and copy data we're interested
   cd master  cp -Rf $HOME/buildApk/* .
-  ls
-  cd $HOME/buildApk/
   ls
   #add, commit and push files
   git add -f .
   git remote rm origin
-  git remote add origin https://TestAccountGTHUB:$GITHUB_API_KEY@github.com/TestAccountGTHUB/TestTravisBuildNew.git
+  git remote add origin https://TestAccountGTHUB:$GITHUB_API_KEY@github.com/TestAccountGTHUB/TestRepo.git
   git add -f .
   git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed [skip ci] "
   git push -fq origin master > /dev/null
