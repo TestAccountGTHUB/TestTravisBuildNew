@@ -1,15 +1,23 @@
 #create a new directory that will contain out generated apk
   mkdir $HOME/buildApk/
   #copy generated apk from build folder to the folder just created
+  echo -e "Debug Folder\n"
+  ls app/build/outputs/apk/debug/
   cp -R app/build/outputs/apk/debug/app-debug.apk $HOME/buildApk/
+  echo -e "Build APK Folder\n"
+  ls $HOME/buildApk/
   #go to home and setup git
+  echo -e "Before Clone At Home Folder \n"
   cd $HOME
+  ls
   git config --global user.email "trythisemail123@gmail.com"
   git config --global user.name "TestAccountGTHUB"
   #clone the repository in the buildApk folder
   git clone --quiet --branch=master  https://TestAccountGTHUB:$GITHUB_API_KEY@github.com/TestAccountGTHUB/TestRepo  master > /dev/null
   #go into directory and copy data we're interested
+  echo -e "After Clone At Home Folder \n"
   ls
+  echo -e "Master Folder \n"
   cd master  cp -Rf $HOME/buildApk/* .
   ls
   #add, commit and push files
