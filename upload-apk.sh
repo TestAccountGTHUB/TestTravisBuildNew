@@ -9,6 +9,7 @@
   #clone the repository in the buildApk folder
   git clone --quiet --branch=master  https://TestAccountGTHUB:$GITHUB_API_KEY@github.com/TestAccountGTHUB/TestRepo  master > /dev/null
   #go into directory and copy data we're interested
+  ls
   cd master  cp -Rf $HOME/buildApk/* .
   ls
   #add, commit and push files
