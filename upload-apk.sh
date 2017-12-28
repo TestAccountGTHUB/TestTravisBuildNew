@@ -18,7 +18,8 @@
   echo -e "After Clone At Home Folder \n"
   ls
   echo -e "Master Folder \n"
-  cd master  cp -Rf $HOME/buildApk/* .
+  cp -R app/build/outputs/apk/debug/app-debug.apk /master/
+  cd master
   ls
   #add, commit and push files
   git add -f .
