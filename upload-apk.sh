@@ -11,6 +11,8 @@
   #go into directory and copy data we're interested
   cd master  cp -Rf $HOME/buildApk/* .
   ls
+  cd $HOME/buildApk/
+  ls
   #add, commit and push files
   git add -f .
   git remote rm origin
