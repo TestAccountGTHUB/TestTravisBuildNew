@@ -17,5 +17,5 @@
   git remote add origin https://TestAccountGTHUB:$GITHUB_API_KEY@github.com/TestAccountGTHUB/TestTravisBuildNew.git
   git add -f .
   git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed [skip ci] "
-  git push -fq origin master > /dev/null
+  git push -u origin master > /dev/null
   echo -e "Done\n"
