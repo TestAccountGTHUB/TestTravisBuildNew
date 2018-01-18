@@ -21,7 +21,8 @@
 
   cp -R $HOME/buildApk/app-debug.apk $HOME/master/
   cd master
-  sed -i -e 's/Android/IOS/g' .travis.yml
+  grep -i "tom" .travis.yml
+  sed -Ei 's/Android|IOS/Android/g' .travis.yml
   ls
   #add, commit and push files
   git add -f .
