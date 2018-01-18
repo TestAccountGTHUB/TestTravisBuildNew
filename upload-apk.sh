@@ -28,6 +28,6 @@
   git remote rm origin
   git remote add origin https://TestAccountGTHUB:$GITHUB_API_KEY@github.com/TestAccountGTHUB/TestRepo.git
   git add -f .
-  git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed "
+  git commit -m "Travis build $TRAVIS_BUILD_NUMBER pushed"
   git push -fq origin master > /dev/null
   echo -e "Done\n"
